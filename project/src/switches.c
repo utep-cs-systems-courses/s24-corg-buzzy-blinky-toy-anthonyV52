@@ -69,9 +69,9 @@ void switch_init(){
 
   P2DIR &= ~SWITCHES;
 
-  switch_update_interrupt_sense_p2();
-  
   switch_update_interrupt_sense();
+  
+  switch_update_interrupt_sense_p2();
 
   led_update();
 
@@ -87,9 +87,15 @@ switch_interrupt_handler()
 
   char p1val = switch_update_interrupt_sense();
 
-  switch_state_down = (p1val & SW1) ? 0 : 1; /* 0 when SW1 is up */
+  // switch_state_down = (p1val & SW1) ? 0 : 1; /* 0 when SW1 is up */
 
-  switch_state_changed = 1;
+  if((p1val & SW1) == 0) state_advance(4);
+
+  //state_advance(4);
+  
+  switch_state_down = !switch_state_down;
+  
+  switch_state_changed = switch_state_changed;
 
   led_update();
 

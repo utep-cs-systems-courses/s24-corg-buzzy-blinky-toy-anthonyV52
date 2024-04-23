@@ -2,8 +2,6 @@
 
 #define switches_included
 
-#define switch_included
-
 #define SW1 BIT3/* switch1 is p1.3 */
 
 #define SWITCH SW1/* only 1 switch on this board */

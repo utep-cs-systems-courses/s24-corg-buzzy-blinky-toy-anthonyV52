@@ -96,7 +96,7 @@ void state_advance(char state)
 
     green_on = 1;
 
-    buzz_tone();
+    buzzer_advance();
 
     break;
 
@@ -120,8 +120,18 @@ void state_advance(char state)
 
     break;
 
+  case 4:
+     if(sb){
+      red_on = 1;
+      green_on = 0;
+      buzzer_advance();
+     }else{
+       red_on = 0;
+       green_on = 1;
+       buzzer_advance();
+     }
+    break;
   }
-
   led_changed = 1;
 
   led_update();
@@ -153,7 +163,6 @@ void state_advance(char state)
       }
   }
   void button_up_state(){
-    char changed = 0;
 
     sb = 1;
 
@@ -168,7 +177,6 @@ void state_advance(char state)
 
   }
 void button_down_state(){
-  char changed = 0;
 
   sb = 0;
 
@@ -179,22 +187,9 @@ void button_down_state(){
   led_changed = 1;
 
   led_update();
-
-}
-/*
-void button1_state(){
-  state_advance(1);
-}
-void button2_state(){
-  state_advance(2);
-}
-void button3_state(){
-  state_advance(3);
-}
-void button4_state(){
-  state_advance(4);
-  }*/
   
+}
+
 void buzz_tone(){
   if(!sb){
     for(int i = x; i > 2000; i+=10){

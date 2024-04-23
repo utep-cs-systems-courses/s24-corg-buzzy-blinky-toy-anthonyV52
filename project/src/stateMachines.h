@@ -8,6 +8,6 @@ void state_advance(char state);
 void buzz_tone();
 void button_up_state();
 void button_down_state();
-
+void buzzer_advance();
 
 #endif // included
